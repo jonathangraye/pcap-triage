@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pcap-triage"
+version = "0.1.0"
+description = "Local, evidence-backed first-pass packet capture troubleshooting"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "scapy>=2.6,<3", "cryptography>=43", "ruff>=0.11,<1"]
+
+[project.scripts]
+pcap-triage = "pcap_triage.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: requires a real tshark executable", "scale: near-limit capture benchmark"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
